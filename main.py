@@ -3,41 +3,48 @@ import pyautogui
 import time
 import pandas as pd
 from datetime import datetime
+import cv2
 
 def sign_in(meetingid, pswd):
     #Opens up the zoom app
     subprocess.call(["/usr/bin/open", "/Applications/zoom.us.app"])
 
     time.sleep(10)
-    
+
     #clicks the join button
-    join_btn = pyautogui.locateCenterOnScreen('join_button.png')
+    x,y = pyautogui.locateCenterOnScreen('join_button.png', grayscale=True)
+    join_btn = x*.5, y*.5  # don't know why it is off by a factor of 2
     pyautogui.moveTo(join_btn)
     pyautogui.click()
 
     # Type the meeting ID
-    meeting_id_btn =  pyautogui.locateCenterOnScreen('meeting_id_button.png')
-    pyautogui.moveTo(meeting_id_btn)
-    pyautogui.click()
+    # x,y =  pyautogui.locateCenterOnScreen('meeting_id_button.png', grayscale=True)
+    # meeting_id_btn = x*.5, y*.5
+    # pyautogui.moveTo(meeting_id_btn)
+    # pyautogui.click()
     pyautogui.write(meetingid)
 
     # Disables both the camera and the mic
-    media_btn = pyautogui.locateAllOnScreen('media_btn.png')
-    for btn in media_btn:
-        pyautogui.moveTo(btn)
-        pyautogui.click()
-        time.sleep(2)
+    # x,y = pyautogui.locateAllOnScreen('media_btn.png', grayscale=True)
+    # media_btn = x*.5, y*.5
+    # for btn in media_btn:
+    #     pyautogui.moveTo(btn)
+    #     pyautogui.click()
+    #     time.sleep(2)
 
     # Hits the join button
-    join_btn = pyautogui.locateCenterOnScreen('join_btn.png')
-    pyautogui.moveTo(join_btn)
-    pyautogui.click()
-    
-    time.sleep(5)
+    pyautogui.press('enter')
+    # x,y = pyautogui.locateCenterOnScreen('join_btn.png', grayscale=True)
+    # join_btn = x*.5, y*.5
+    # pyautogui.moveTo(join_btn)
+    # pyautogui.click()
+
+    time.sleep(2)
     #Types the password and hits enter
-    meeting_pswd_btn = pyautogui.locateCenterOnScreen('meeting_pswd.png')
-    pyautogui.moveTo(meeting_pswd_btn)
-    pyautogui.click()
+    # x,y = pyautogui.locateCenterOnScreen('meeting_pswd.png', grayscale=True)
+    # meeting_pswd_btn = x*.5, y*.5
+    # pyautogui.moveTo(meeting_pswd_btn)
+    # pyautogui.click()
     pyautogui.write(pswd)
     pyautogui.press('enter')
 
