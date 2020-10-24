@@ -1,7 +1,6 @@
 import subprocess
 import pyautogui
 import time
-import pandas as pd
 from datetime import datetime
 import sys
 import os
@@ -40,7 +39,13 @@ def check_sucessful():
         return False
 
 
-def sign_in(meetingid, pswd):
+def sign_in(meetingid, pswd=None):
+    """
+    Sign into a zoom meeting.
+
+    meetingid is the 10 digit meeting code
+    pswd is the password, if applicable
+    """
     # Opens up the zoom app
     subprocess.call(["/usr/bin/open", "/Applications/zoom.us.app"])
 
@@ -67,16 +72,21 @@ def sign_in(meetingid, pswd):
     pyautogui.press('enter')
     time.sleep(1)
 
-    # Types the password and hits enter
-    pyautogui.write(pswd)
-    pyautogui.press('enter')
-    time.sleep(10)
+    if pswd:
+        # Types the password and hits enter
+        pyautogui.write(pswd)
+        pyautogui.press('enter')
+        time.sleep(10)
 
 
 if __name__ == "__main__":
     m_id = int(sys.argv[1])
-    m_pswd = str(sys.argv[2])
 
-    sign_in(m_id, m_pswd)
+    try:
+        m_pswd = str(sys.argv[2])
+    except:
+        m_pswd = None
+
+    sign_in(m_id, pswd=m_pswd)
     if check_sucessful() is True:
         print(f'Sucessfully signed in at {datetime.now()}')
