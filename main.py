@@ -12,8 +12,8 @@ class Zoom:
     """A class for zoom meetings."""
 
     def __init__(self, meetingid, pswd=None):
-        self.meeting_id = int(meetingid)
-        self.password = str(pswd)
+        self.meeting_id = meetingid
+        self.password = pswd
 
     def check_video_status():
         """Checks to see if audio is muted and video is turned off."""
@@ -108,7 +108,7 @@ class Zoom:
 
 
 if __name__ == "__main__":
-    m_id = int(sys.argv[1])
+    m_id = str(sys.argv[1])
 
     try:  # todo: this might not be the best way to implement this
         m_pswd = str(sys.argv[2])
