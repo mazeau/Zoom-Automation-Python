@@ -12,8 +12,8 @@ class Zoom:
     """A class for zoom meetings."""
 
     def __init__(self, meetingid, pswd=None):
-        self.meeting_id = meetingid
-        self.password = pswd
+        self.meeting_id = int(meetingid)
+        self.password = str(pswd)
 
     def check_video_status():
         """Checks to see if audio is muted and video is turned off."""
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     except:
         m_pswd = None
 
-    Zoom(m_id, pswd=m_pswd).sign_in()
+    Zoom.sign_in(m_id, pswd=m_pswd)
 
     if Zoom.in_meeting() is True:
         print(f'Successful sign in at {datetime.now()}')
